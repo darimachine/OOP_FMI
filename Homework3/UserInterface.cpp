@@ -9,7 +9,7 @@ void MainMenu()
 	cout << "Option 1): Enter: a , Enter: b, Prints every number from function within this Interval\n";
 	cout << "Option 2): Generate every number until you type Exit\n";
 	int choice;
-	
+
 	while (true)
 	{
 		cin >> choice;
@@ -21,8 +21,8 @@ void MainMenu()
 		}
 	}
 	PartialFunction* p = Factory::factoryFunction("func.dat");
-	
-	
+
+
 	if (choice == 1)
 	{
 		int a, b;
@@ -48,15 +48,20 @@ void MainMenu()
 	else {
 		while (true)
 		{
-			cout << "Enter X:\n";
-			int x;
+			cout << "Enter X(int), (Or type exit to stop the program):\n";
+			MyString x;
 			cin >> x;
-			if (p->isDefined(x))
+			if (x == "exit")
 			{
-				cout << "f(" << x << ")" << "=" << (*p)(x) << endl;
+				break;
+			}
+			int value = atoi(x.c_str());
+			if (p->isDefined(value))
+			{
+				cout << "f(" << value << ")" << "=" << (*p)(value) << endl;
 			}
 			else {
-				cout << "f(" << x << ")" << "=" << "Undefined" << endl;
+				cout << "f(" << value << ")" << "=" << "Undefined" << endl;
 			}
 		}
 	}

@@ -7,7 +7,7 @@ void save()
 	std::ofstream ofs(filename, std::ios::binary);
 	uint16_t N = 7;
 	uint16_t T = 0;
-	int args[MAX_SIZE] =	{ 0,1,2,3,5,6,7 };
+	int args[MAX_SIZE] = { 0,1,2,3,5,6,7 };
 	int result[MAX_SIZE] = { 0,3,3,3,4,4,0 };
 	ofs.write((const char*)&N, sizeof(N));
 	ofs.write((const char*)&T, sizeof(T));
@@ -21,7 +21,7 @@ void save2()
 	std::ofstream ofs(filename, std::ios::binary);
 	uint16_t N = 2;
 	uint16_t T = 1;
-	int args[MAX_SIZE] = { 3,5};
+	int args[MAX_SIZE] = { 3,5 };
 	//int result[32] = { 0,3,3,3,4,4,0 };
 	ofs.write((const char*)&N, sizeof(N));
 	ofs.write((const char*)&T, sizeof(T));
@@ -49,14 +49,14 @@ void saveFuncDAT()
 	uint16_t N = 3;
 	uint16_t T = 3;
 	char filename1[] = "first.dat";
-	int filename1Size = std::strlen(filename1)+1;
-	
+	size_t filename1Size = std::strlen(filename1) + 1;
+
 	char filename2[] = "second.dat";
-	int filename2Size = std::strlen(filename2)+1;
+	int filename2Size = std::strlen(filename2) + 1;
 
 	char filename3[] = "third.dat";
 
-	int filename3Size = std::strlen(filename3)+1;
+	int filename3Size = std::strlen(filename3) + 1;
 	ofs.write((const char*)&N, sizeof(N));
 	ofs.write((const char*)&T, sizeof(T));
 	ofs.write((const char*)filename1, filename1Size);
@@ -65,10 +65,50 @@ void saveFuncDAT()
 
 	ofs.close();
 }
+void saveFunc2Recursion()
+{
+	char filename[] = "func.dat";
+	std::ofstream ofs(filename, std::ios::binary);
+	uint16_t N = 2;
+	uint16_t T = 3;
+	char filename1[] = "func2.dat";
+	size_t filename1Size = std::strlen(filename1) + 1;
+
+	char filename2[] = "third.dat";
+	int filename2Size = std::strlen(filename2) + 1;
+
+	ofs.write((const char*)&N, sizeof(N));
+	ofs.write((const char*)&T, sizeof(T));
+	ofs.write((const char*)filename1, filename1Size);
+	ofs.write((const char*)filename2, filename2Size);
+	//ofs.write((const char*)filename3, filename3Size);
+
+	ofs.close();
+}
+void saveFunc2()
+{
+	char filename[] = "func2.dat";
+	std::ofstream ofs(filename, std::ios::binary);
+	uint16_t N = 2;
+	uint16_t T = 4;
+	char filename1[] = "first.dat";
+	size_t filename1Size = std::strlen(filename1) + 1;
+
+	char filename2[] = "second.dat";
+	size_t filename2Size = std::strlen(filename2) + 1;
+
+	ofs.write((const char*)&N, sizeof(N));
+	ofs.write((const char*)&T, sizeof(T));
+	ofs.write((const char*)filename1, filename1Size);
+	ofs.write((const char*)filename2, filename2Size);
+	//ofs.write((const char*)filename3, filename3Size);
+
+	ofs.close();
+}
 PartialFunction* factory()
 {
 	save();
-	
+
 	char filename[] = "first.dat";
 	std::ifstream ifs(filename, std::ios::binary);
 	uint16_t N, T;
@@ -103,7 +143,7 @@ PartialFunction* factory2()
 	case 1: {
 		int args[MAX_SIZE];
 		ifs.read((char*)args, sizeof(int) * N);
-		
+
 		SecondCriteria func(args, N);
 		return new PartialFunctionByCriteria<SecondCriteria>(func);
 	}
@@ -113,11 +153,12 @@ PartialFunction* factory2()
 
 PartialFunction* Factory::secondCriteriaFactory(std::ifstream& ifs, uint16_t N)
 {
+
 	int args[MAX_SIZE];
 	ifs.read((char*)args, sizeof(int) * N);
 	SecondCriteria func(args, N);
 	return new PartialFunctionByCriteria<SecondCriteria>(func);
-	
+
 }
 
 PartialFunction* Factory::thirdCriteriaFactory(std::ifstream& ifs, uint16_t N)
@@ -128,7 +169,7 @@ PartialFunction* Factory::thirdCriteriaFactory(std::ifstream& ifs, uint16_t N)
 	return new PartialFunctionByCriteria<ThirdCriteria>(func);
 }
 
-PartialFunction* Factory::firstCriteriaFactory(std::ifstream& ifs,uint16_t N)
+PartialFunction* Factory::firstCriteriaFactory(std::ifstream& ifs, uint16_t N)
 {
 	int args[MAX_SIZE];
 	int result[MAX_SIZE];
@@ -136,7 +177,7 @@ PartialFunction* Factory::firstCriteriaFactory(std::ifstream& ifs,uint16_t N)
 	ifs.read((char*)result, sizeof(int) * N);
 	FirstCriteria func(args, result, N);
 	return new PartialFunctionByCriteria<FirstCriteria>(func);
-	
+
 }
 
 PartialFunction* Factory::factoryFunction(const char* filename)
@@ -145,57 +186,59 @@ PartialFunction* Factory::factoryFunction(const char* filename)
 	if (!ifs.is_open())
 	{
 		throw std::exception("File Could Open");
-		
+
 	}
 	uint16_t N, T;
 	ifs.read((char*)&N, sizeof(N));
-	if (N > 32|| N==0) {
+	if (N > 32 || N == 0) {
 		throw std::out_of_range("N incorrect");
 	}
 
 	ifs.read((char*)&T, sizeof(T));
-	
+
 	switch (T) {
-		case 0: {
-			return firstCriteriaFactory(ifs, N);
-		}
-		case 1: {
-			return secondCriteriaFactory(ifs, N);
-		}
-		case 2: {
-			return thirdCriteriaFactory(ifs, N);
-		}
-		case 3: {
-			PartialFunctionContainer container;
-			for (int i = 0; i < N; i++)
+	case 0: {
+		return firstCriteriaFactory(ifs, N);
+	}
+	case 1: {
+		return secondCriteriaFactory(ifs, N);
+	}
+	case 2: {
+		return thirdCriteriaFactory(ifs, N);
+	}
+	case 3: {
+		PartialFunctionContainer container;
+		for (int i = 0; i < N; i++)
+		{
+			MyString filename;
+			char ch;
+			while (ifs.read((char*)&ch, 1) && ch != '\0')
 			{
-				MyString filename;
-				char ch;
-				while (ifs.read((char *)&ch,1) && ch!='\0')
-				{
-					filename += ch;
-				}
-				container.addFunction(factoryFunction(filename.c_str()));
+				filename += ch;
 			}
-			return new MaximumOfPartialFunction(container);
+
+			container.addFunction(factoryFunction(filename.c_str()));
 		}
-		case 4: {
-			PartialFunctionContainer container;
-			for (int i = 0; i < N; i++)
+		return new MaximumOfPartialFunction(container);
+	}
+	case 4: {
+		PartialFunctionContainer container;
+		for (int i = 0; i < N; i++)
+		{
+			MyString filename;
+			char ch;
+			while (ifs.read((char*)&ch, 1) && ch != '\0')
 			{
-				MyString filename;
-				char ch;
-				while (ifs.read((char*)&ch, 1) && ch != '\0')
-				{
-					filename += ch;
-				}
-				container.addFunction(factoryFunction(filename.c_str()));
+				filename += ch;
 			}
-			return new MinimumOfPartialFunction(container);
+
+			container.addFunction(factoryFunction(filename.c_str()));
 		}
-		default: {
-			throw std::out_of_range("Invalid T");
-		}
+		return new MinimumOfPartialFunction(container);
+	}
+	default: {
+		throw std::out_of_range("Invalid T");
+	}
 	}
 	return nullptr;
 }

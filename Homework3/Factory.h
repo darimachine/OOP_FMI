@@ -4,7 +4,7 @@
 #include "FirstCriteria.h"
 #include "SecondCriteria.h"
 #include "ThirdCriteria.h"
-#include "PartialFunctionByCriteria.hpp"
+#include "PartialFunctionByCriteria.h"
 #include "MaximumOfPartialFunction.h"
 #include "MinimumOfPartialFunction.h"
 #include <fstream>
@@ -14,6 +14,8 @@ void save();
 void save2();
 void save3();
 void saveFuncDAT();
+void saveFunc2Recursion();
+void saveFunc2();
 //реяр
 PartialFunction* factory();
 PartialFunction* factory2();

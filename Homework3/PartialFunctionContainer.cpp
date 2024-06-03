@@ -67,7 +67,7 @@ PartialFunctionContainer& PartialFunctionContainer::operator=(const PartialFunct
 		copyFrom(other);
 	}
 	return *this;
-	
+
 }
 
 PartialFunctionContainer& PartialFunctionContainer::operator=(PartialFunctionContainer&& other) noexcept
@@ -78,8 +78,8 @@ PartialFunctionContainer& PartialFunctionContainer::operator=(PartialFunctionCon
 		moveFrom(std::move(other));
 	}
 	return *this;
-	
-	
+
+
 }
 
 void PartialFunctionContainer::addFunction(PartialFunction* func)

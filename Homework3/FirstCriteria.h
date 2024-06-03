@@ -1,16 +1,13 @@
 #pragma once
 #include "Pair.hpp"
-
-class FirstCriteria 
+#include "CriteriaInterface.h"
+class FirstCriteria : public CriteriaInterface
 {
-	int args[MAX_SIZE];
 	int res[MAX_SIZE];
-	int N;
-	int findIndex(int x) const;
 public:
-	FirstCriteria(int* args, int* res, int N);
+	FirstCriteria(int* args, int* res, uint16_t N);
 
-	Pair<bool, int> operator()(int x) const;
+	Pair<bool, int> operator()(int x) const override;
 	
 };
 

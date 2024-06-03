@@ -3,22 +3,9 @@
 
 
 MinimumOfPartialFunction::MinimumOfPartialFunction(const PartialFunctionContainer& _funcs)
-	:funcs(_funcs)
+	:BaseMinMax(_funcs)
 {
 
-}
-
-bool MinimumOfPartialFunction::isDefined(int x) const
-{
-	int size = funcs.getSize();
-	for (int i = 0; i < size; i++)
-	{
-		if (!funcs.getFunc(i)->isDefined(x))
-		{
-			return false;
-		}
-	}
-	return true;
 }
 
 int MinimumOfPartialFunction::operator()(int x) const
@@ -27,11 +14,11 @@ int MinimumOfPartialFunction::operator()(int x) const
 	{
 		throw std::exception("Not Defined");
 	}
-	int size = funcs.getSize();
-	int min = funcs.getFunc(0)->operator()(x);
+	int size = functions.getSize();
+	int min = functions.getFunc(0)->operator()(x);
 	for (int i = 1; i < size; i++)
 	{
-		int value = funcs.getFunc(i)->operator()(x);
+		int value = functions.getFunc(i)->operator()(x);
 		if (value < min)
 		{
 			min = value;
@@ -42,5 +29,5 @@ int MinimumOfPartialFunction::operator()(int x) const
 
 PartialFunction* MinimumOfPartialFunction::clone() const
 {
-    return new MinimumOfPartialFunction(*this);
+	return new MinimumOfPartialFunction(*this);
 }

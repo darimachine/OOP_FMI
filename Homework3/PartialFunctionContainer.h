@@ -24,20 +24,6 @@ public:
 	void addFunction(PartialFunction* func);
 	void addFunction(const PartialFunction& func);
 	
-	/*const PartialFunction * operator[](unsigned index) const {
-		if (index >= size)
-		{
-			throw std::out_of_range("Index out range");
-		}
-		return funcs[index];
-	}
-	PartialFunction* operator[](unsigned index) {
-		if (index >= size)
-		{
-			throw std::out_of_range("Index out range");
-		}
-		return funcs[index];
-	}*/
 	//get
 	unsigned getSize() const;
 	const PartialFunction* getFunc(unsigned index) const;

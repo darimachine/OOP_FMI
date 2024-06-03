@@ -1,21 +1,9 @@
 #include "FirstCriteria.h"
 
-int FirstCriteria::findIndex(int x) const
+FirstCriteria::FirstCriteria(int* args, int* res, uint16_t N) : CriteriaInterface(args, N)
 {
 	for (int i = 0; i < N; i++)
 	{
-		if (x == args[i])
-			return i;
-	}
-	return -1;
-}
-
-FirstCriteria::FirstCriteria(int* args, int* res, int N)
-{
-	this->N = N;
-	for (int i = 0; i < N; i++)
-	{
-		this->args[i] = args[i];
 		this->res[i] = res[i];
 	}
 }

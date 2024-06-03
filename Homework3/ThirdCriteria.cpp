@@ -1,23 +1,8 @@
 #include "ThirdCriteria.h"
 
-int ThirdCriteria::findIndex(int x) const
+ThirdCriteria::ThirdCriteria(int* args, uint16_t N) : CriteriaInterface(args, N)
 {
-	for (int i = 0; i < N; i++)
-	{
-		if (args[i] == x) {
-			return i;
-		}
-	}
-    return -1;
-}
 
-ThirdCriteria::ThirdCriteria(int* args, uint16_t N)
-{
-	this->N = N;
-	for (int i = 0; i < N; i++)
-	{
-		this->args[i] = args[i];
-	}
 }
 
 Pair<bool, int> ThirdCriteria::operator()(int x) const

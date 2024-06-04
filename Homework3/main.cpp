@@ -6,7 +6,7 @@
 #include "Factory.h"
 #include "UserInterface.h"
 #include "PartialFunctionByCriteria.h"
-
+#include "UniquePointer.hpp"
 using std::cout;
 using std::endl;
 //Proba with function;
@@ -26,7 +26,12 @@ int main()
 {
     PartialFunctionByCriteria<FuncType> func(f);
     cout << func(5)<<endl;
-
+    while (true)
+    {
+        UniquePointer<PartialFunction> function = Factory::factoryFunction("func.dat");
+    }
+   
+  
     save();// saves firstCriteria for TESTING!!!
     save2();// saves twoCriteria for TESTING!!!
     save3(); // saves thirdCriteria for TESTING!!!

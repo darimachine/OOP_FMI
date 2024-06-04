@@ -1,6 +1,7 @@
 #include <iostream>
 #include "PartialFunction.h"
 #include "Factory.h"
+#include "UniquePointer.hpp"
 using std::cout;
 using std::endl;
 using std::cin;
@@ -20,7 +21,8 @@ void MainMenu()
 			cout << "Incorrect Choice choose again\n";
 		}
 	}
-	PartialFunction* p = Factory::factoryFunction("func.dat");
+	UniquePointer<PartialFunction> function = Factory::factoryFunction("func.dat");
+	//PartialFunction* p = Factory::factoryFunction("func.dat");
 
 
 	if (choice == 1)
@@ -35,9 +37,9 @@ void MainMenu()
 		}
 		for (int i = a; i <= b; i++)
 		{
-			if (p->isDefined(i))
+			if (function->isDefined(i))
 			{
-				cout << "f(" << i << ")" << "=" << (*p)(i) << endl;
+				cout << "f(" << i << ")" << "=" << (*function)(i) << endl;
 			}
 			else {
 				cout << "f(" << i << ")" << "=" << "Undefined" << endl;
@@ -56,14 +58,14 @@ void MainMenu()
 				break;
 			}
 			int value = atoi(x.c_str());
-			if (p->isDefined(value))
+			if (function->isDefined(value))
 			{
-				cout << "f(" << value << ")" << "=" << (*p)(value) << endl;
+				cout << "f(" << value << ")" << "=" << (*function)(value) << endl;
 			}
 			else {
 				cout << "f(" << value << ")" << "=" << "Undefined" << endl;
 			}
 		}
 	}
-	delete p;
+	
 }

@@ -53,11 +53,19 @@ Polynom::Polynom() : Polynom(4) // default value
 
 Polynom::Polynom(size_t n)
 {
-    arr = new double[n] {1};
+    size = n;
+    arr = new double[n];
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = 1;
+    }
 }
 
-Polynom::Polynom(double* arr, size_t n)
+Polynom::Polynom(const double* arr, size_t n)
 {
+    if (!arr) {
+        return;
+    }
     size = n;
     this->arr = new double[size];
     for (int i = 0; i < size; i++)
@@ -82,6 +90,9 @@ Polynom& Polynom::operator=(const Polynom& other)
 
 void Polynom::load(const char* fileName)
 {
+    if (!fileName) {
+        return;
+    }
     std::ifstream ifs("file.txt");
     if (!ifs.is_open()) {
         return;

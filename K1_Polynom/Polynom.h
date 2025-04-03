@@ -17,7 +17,7 @@ class Polynom
 public:
 	Polynom();
 	Polynom(size_t n);
-	Polynom(double* arr, size_t n);
+	Polynom(const double* arr, size_t n);
 	Polynom(const Polynom& other);
 	Polynom& operator=(const Polynom& other);
 

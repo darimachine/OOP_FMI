@@ -21,7 +21,7 @@ public:
 	Polynom(const Polynom& other);
 	Polynom& operator=(const Polynom& other);
 
-	void load(const char* fileName);// can accept as argument std::ofstream& ofs as well!
+	void load(const char* fileName);// can accept as argument std::ifstream& ifs as well!
 	void print() const;
 	Polynom& add(const Polynom& other);
 

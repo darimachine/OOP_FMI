@@ -16,7 +16,7 @@ class Polynom
 	int getCharCount(std::ifstream& ifs,char ch) const; // can be made with method insertAtEnd(), but we must have capacity as well as member data
 public:
 	Polynom();
-	Polynom(size_t n);
+	explicit Polynom(size_t n);
 	Polynom(const double* arr, size_t n);
 	Polynom(const Polynom& other);
 	Polynom& operator=(const Polynom& other);
